@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const RegisterPage = () => {
-  const [form, setForm] = useState({ username: '', email: '', password: '' });
+const LoginPage = () => {
+  const [form, setForm] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
@@ -13,25 +13,23 @@ const RegisterPage = () => {
     e.preventDefault();
     setMessage('');
     try {
-      const res = await axios.post('http://localhost:5000/api/users/register', form);
-      setMessage('✅ Registered successfully!');
+      const res = await axios.post('http://localhost:5000/api/users/login', form);
+      setMessage('✅ Login successful!');
     } catch (err) {
-      setMessage(err.response?.data?.error || 'Registration failed.');
+      setMessage(err.response?.data?.error || 'Login failed.');
     }
   };
-
   return (
     <div>
-      <h2>Register</h2>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input name="username" placeholder="Username" onChange={handleChange} />
         <input name="email" placeholder="Email" type="email" onChange={handleChange} />
         <input name="password" placeholder="Password" type="password" onChange={handleChange} />
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
       </form>
       <p>{message}</p>
     </div>
   );
 };
 
-export default RegisterPage;
+export default LoginPage;
