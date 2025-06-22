@@ -34,6 +34,15 @@ const HomePage = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/todos/${id}`);
+      fetchTodos();
+    } catch (err) {
+      console.error('Delete error', err);
+    }
+  };
+
   return (
     <div>
       <h2>Focus List</h2>
@@ -49,11 +58,12 @@ const HomePage = () => {
       </form>
 
       <ul>
-        {todos.length === 0 ? (
-          <p>No Tasks yet.</p>
-        ) : (
-          todos.map((todo) => <li key={todo._id}>{todo.title}</li>)
-        )}
+        {todos.map((todo) => (
+          <li key={todo._id}>
+            {todo.title}
+            <button onClick={() => handleDelete(todo._id)}>❌</button>
+          </li>
+        ))}
       </ul>
     </div>
   );
