@@ -43,4 +43,19 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// PATCH /api/todos/:id - 切换任务完成状态
+router.patch('/:id', async (req, res) => {
+  try {
+    const todo = await Todo.findById(req.params.id);
+    if (!todo) return res.status(404).json({ error: 'Todo not found.' });
+
+    todo.done = !todo.done;
+    const updated = await todo.save();
+    res.json(updated);
+  } catch (err) {
+    console.error('Toggle Todo Error:', err);
+    res.status(500).json({ error: 'Server error.' });
+  }
+});
+
 export default router;

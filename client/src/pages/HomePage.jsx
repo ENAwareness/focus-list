@@ -43,6 +43,15 @@ const HomePage = () => {
     }
   };
 
+  const handleToggle = async (id) => {
+    try {
+      await axios.patch(`http://localhost:5000/api/todos/${id}`);
+      fetchTodos(); //更新列表
+    } catch (err) {
+      console.error('Toggle error', err);
+    }
+  };
+
   return (
     <div>
       <h2>Focus List</h2>
@@ -59,9 +68,18 @@ const HomePage = () => {
 
       <ul>
         {todos.map((todo) => (
-          <li key={todo._id}>
+          <li
+            key={todo._id}
+            onClick={() => handleToggle(todo._id)}
+            style={{ textDecoration: todo.done ? 'line-through' : 'none', cursor: 'pointer' }}>
             {todo.title}
-            <button onClick={() => handleDelete(todo._id)}>❌</button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDelete(todo._id);
+              }}>
+              ❌
+            </button>
           </li>
         ))}
       </ul>
