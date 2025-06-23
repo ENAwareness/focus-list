@@ -53,35 +53,45 @@ const HomePage = () => {
   };
 
   return (
-    <div>
-      <h2>Focus List</h2>
+    <div className="max-w-xl mx-auto mt-10 px-4">
+      <h2 className="text-2xl font-bold mb-4">📝 Focus List</h2>
 
-      <form onSubmit={handleAddTodo}>
+      <form onSubmit={handleAddTodo} className="flex gap-2 mb-4">
         <input
           type="text"
           placeholder="Enter a task"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className="flex-grow border rounded px-3 py-2"
         />
-        <button type="submit">Add</button>
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+          Add
+        </button>
       </form>
 
-      <ul>
-        {todos.map((todo) => (
-          <li
-            key={todo._id}
-            onClick={() => handleToggle(todo._id)}
-            style={{ textDecoration: todo.done ? 'line-through' : 'none', cursor: 'pointer' }}>
-            {todo.title}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleDelete(todo._id);
-              }}>
-              ❌
-            </button>
-          </li>
-        ))}
+      <ul className="space-y-2">
+        {todos.length === 0 ? (
+          <p className="text-gray-500">No tasks yet.</p>
+        ) : (
+          todos.map((todo) => (
+            <li
+              key={todo._id}
+              onClick={() => handleToggle(todo._id)}
+              className={`flex justify-between items-center px-4 py-2 border rounded cursor-pointer ${
+                todo.done ? 'line-through text-gray-400' : ''
+              }`}>
+              <span>{todo.title}</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete(todo._id);
+                }}
+                className="text-red-500 hover:text-red-700">
+                ❌
+              </button>
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );

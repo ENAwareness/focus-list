@@ -14,7 +14,7 @@ const RegisterPage = () => {
     setMessage('');
     try {
       const res = await axios.post('http://localhost:5000/api/users/register', form);
-      setMessage('✅ Registered successfully!');
+      setMessage(`✅ Welcome, ${res.data.username || 'user'}!`);
     } catch (err) {
       setMessage(err.response?.data?.error || 'Registration failed.');
     }

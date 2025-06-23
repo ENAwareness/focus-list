@@ -14,7 +14,7 @@ const LoginPage = () => {
     setMessage('');
     try {
       const res = await axios.post('http://localhost:5000/api/users/login', form);
-      setMessage('✅ Login successful!');
+      setMessage(`✅ Welcome back, ${res.data.username || 'User'}!`);
     } catch (err) {
       setMessage(err.response?.data?.error || 'Login failed.');
     }
