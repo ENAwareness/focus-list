@@ -54,7 +54,7 @@ const HomePage = () => {
 
   return (
     <div className="max-w-xl mx-auto mt-10 px-4">
-      <h2 className="text-2xl font-bold mb-4">📝 Focus List</h2>
+      <h2 className="text-2xl font-bold mb-4">📝 My Focus List</h2>
 
       <form onSubmit={handleAddTodo} className="flex gap-2 mb-4">
         <input
