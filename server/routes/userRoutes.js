@@ -27,7 +27,7 @@ router.post('/register', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({ username, email, password }); //修正了双重hash值加密
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully.' });
@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials.' });
     }
 
-    res.status(200).json({ message: 'Login successfully.' });
+    res.status(200).json({ email: user.email });
   } catch (err) {
     console.error('Login Error:', err);
     res.status(500).json({ error: 'Server error.' });

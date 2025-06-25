@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState('');
 
   //获取任务列表
   const fetchTodos = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/todos');
+      const email = JSON.parse(localStorage.getItem('user')).email;
+      const res = await axios.get('http://localhost:5000/api/todos', {
+        params: { email }
+      });
       setTodos(res.data);
     } catch (err) {
       console.error('Failed to fetch todos', err);
@@ -17,8 +23,13 @@ const HomePage = () => {
 
   //初始化加载
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    const user = localStorage.getItem('user');
+    if (!user) {
+      navigate('login');
+    } else {
+      fetchTodos();
+    }
+  }, [navigate]);
 
   //提交新任务
   const handleAddTodo = async (e) => {
@@ -26,7 +37,8 @@ const HomePage = () => {
     if (!title.trim()) return;
 
     try {
-      await axios.post('http://localhost:5000/api/todos', { title });
+      const email = JSON.parse(localStorage.getItem('user')).email;
+      await axios.post('http://localhost:5000/api/todos', { title, email });
       setTitle('');
       fetchTodos(); //重新加载任务列表
     } catch (err) {

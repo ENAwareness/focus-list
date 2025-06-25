@@ -14,6 +14,14 @@ const Layout = ({ children }) => {
           <a href="/register" className="hover:text-blue-500">
             Register
           </a>
+          <button
+            onClick={() => {
+              localStorage.removeItem('user');
+              window.location.href = '/login';
+            }}
+            className="bg-red-500 text-white px-3 py-1 rounded ml-4">
+            Logout
+          </button>
         </nav>
       </header>
       <main className="p-6">{children}</main>

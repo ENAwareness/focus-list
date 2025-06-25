@@ -1,12 +1,19 @@
 import express from 'express';
 import Todo from '../models/Todo.js';
+import User from '../models/User.js';
 
 const router = express.Router();
 
-//获取所有待办
+//GET /api/todos?email=xx@xx.com
 router.get('/', async (req, res) => {
+  const { email } = req.query;
+  if (!email) return res.status(400).json({ error: 'Missing email' });
+
   try {
-    const todos = await Todo.find().sort({ createdAt: -1 });
+    const user = await User.findOne({ email });
+    if (!user) return res.status(401).json({ error: 'User noe found' });
+
+    const todos = await Todo.find({ user: user._id }).sort({ createdAt: -1 });
     res.json(todos);
   } catch (err) {
     console.error('Get Todos Error', err);
@@ -14,13 +21,16 @@ router.get('/', async (req, res) => {
   }
 });
 
-//创建待办
+//POST /api/todos
 router.post('/', async (req, res) => {
-  const { title } = req.body;
-  if (!title) return res.status(400).json({ error: 'Title is required.' });
+  const { title, email } = req.body;
+  if (!title || !email) return res.status(400).json({ error: 'Title and email is required.' });
 
   try {
-    const newTodo = new Todo({ title });
+    const user = await User.findOne({ email });
+    if (!user) return res.status(401).json({ error: 'User not found' });
+
+    const newTodo = new Todo({ title, user: user._id });
     const saved = await newTodo.save();
     res.status(201).json(saved);
   } catch (err) {
@@ -29,7 +39,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-//删除某个任务
+//DELETE
 router.delete('/:id', async (req, res) => {
   try {
     const deleted = await Todo.findByIdAndDelete(req.params.id);
