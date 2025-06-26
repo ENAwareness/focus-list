@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -10,8 +9,6 @@ const LoginPage = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
@@ -19,7 +16,7 @@ const LoginPage = () => {
       const res = await axios.post('http://localhost:5000/api/users/login', form);
       localStorage.setItem('user', JSON.stringify({ email: form.email }));
       setMessage(`✅ Welcome back, ${res.data.username || 'User'}!`);
-      navigate('/');
+      window.location.href = '/';
     } catch (err) {
       setMessage(err.response?.data?.error || 'Login failed.');
     }
