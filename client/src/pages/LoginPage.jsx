@@ -14,7 +14,10 @@ const LoginPage = () => {
     setMessage('');
     try {
       const res = await axios.post('http://localhost:5000/api/users/login', form);
-      localStorage.setItem('user', JSON.stringify({ email: form.email }));
+      localStorage.setItem(
+        'user',
+        JSON.stringify({ email: res.data.email, username: res.data.username })
+      );
       setMessage(`✅ Welcome back, ${res.data.username || 'User'}!`);
       window.location.href = '/';
     } catch (err) {

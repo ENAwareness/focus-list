@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
 
           {user && (
             <>
-              <span className="text-sm text-gray-500">👋 {user.email}</span>
+              <span className="text-sm text-gray-500">👋 {user.username}</span>
               <button onClick={handleLogout} className="bg-red-500 text-white px-3 py-1 rounded">
                 Logout
               </button>
