@@ -1,26 +1,23 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
     try {
       const res = await axios.post('http://localhost:5000/api/users/login', form);
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('user', JSON.stringify({ username: res.data.username }));
-      setMessage(`✅ Welcome back, ${res.data.username || 'User'}!`);
-      navigate('/');
+      // 使用 context 中的 login 函数，它会处理状态更新和页面跳转
+      login({ username: res.data.username }, res.data.token);
     } catch (err) {
       setMessage(err.response?.data?.error || 'Login failed.');
     }
