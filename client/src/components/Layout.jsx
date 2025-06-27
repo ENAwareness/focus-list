@@ -16,6 +16,7 @@ const Layout = ({ children }) => {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setUser(null); // 立即更新状态
     navigate('/login');
   };

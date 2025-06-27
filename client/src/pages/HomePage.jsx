@@ -11,10 +11,12 @@ const HomePage = () => {
 
   //获取任务列表
   const fetchTodos = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
     try {
-      const email = JSON.parse(localStorage.getItem('user')).email;
       const res = await axios.get('http://localhost:5000/api/todos', {
-        params: { email }
+        headers: { Authorization: `Bearer ${token}` }
       });
       setTodos(res.data);
     } catch (err) {
@@ -24,9 +26,9 @@ const HomePage = () => {
 
   //初始化加载
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (!user) {
-      navigate('login');
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
     } else {
       fetchTodos();
     }
@@ -38,8 +40,15 @@ const HomePage = () => {
     if (!title.trim()) return;
 
     try {
-      const email = JSON.parse(localStorage.getItem('user')).email;
-      await axios.post('http://localhost:5000/api/todos', { title, email });
+      const token = localStorage.getItem('token');
+      if (!token) return;
+      await axios.post(
+        'http://localhost:5000/api/todos',
+        { title },
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
       setTitle('');
       fetchTodos(); //重新加载任务列表
     } catch (err) {
@@ -49,7 +58,11 @@ const HomePage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/todos/${id}`);
+      const token = localStorage.getItem('token');
+      if (!token) return;
+      await axios.delete(`http://localhost:5000/api/todos/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       fetchTodos();
     } catch (err) {
       console.error('Delete error', err);
@@ -58,7 +71,15 @@ const HomePage = () => {
 
   const handleToggle = async (id) => {
     try {
-      await axios.patch(`http://localhost:5000/api/todos/${id}`);
+      const token = localStorage.getItem('token');
+      if (!token) return;
+      await axios.patch(
+        `http://localhost:5000/api/todos/${id}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
       fetchTodos(); //更新列表
     } catch (err) {
       console.error('Toggle error', err);

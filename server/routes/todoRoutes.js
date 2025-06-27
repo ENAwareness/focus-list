@@ -1,19 +1,16 @@
 import express from 'express';
 import Todo from '../models/Todo.js';
-import User from '../models/User.js';
+import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-//GET /api/todos?email=xx@xx.com
+router.use(protect);
+
+//GET /api/todos - 获取当前用户待办事项
 router.get('/', async (req, res) => {
-  const { email } = req.query;
-  if (!email) return res.status(400).json({ error: 'Missing email' });
-
   try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(401).json({ error: 'User noe found' });
-
-    const todos = await Todo.find({ user: user._id }).sort({ createdAt: -1 });
+    //req.user 由protect 中间件设置
+    const todos = await Todo.find({ user: req.user._id }).sort({ createdAt: -1 });
     res.json(todos);
   } catch (err) {
     console.error('Get Todos Error', err);
@@ -23,14 +20,11 @@ router.get('/', async (req, res) => {
 
 //POST /api/todos
 router.post('/', async (req, res) => {
-  const { title, email } = req.body;
-  if (!title || !email) return res.status(400).json({ error: 'Title and email is required.' });
+  const { title } = req.body;
+  if (!title) return res.status(400).json({ error: 'Title is required.' });
 
   try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(401).json({ error: 'User not found' });
-
-    const newTodo = new Todo({ title, user: user._id });
+    const newTodo = new Todo({ title, user: req.user._id });
     const saved = await newTodo.save();
     res.status(201).json(saved);
   } catch (err) {
@@ -39,13 +33,20 @@ router.post('/', async (req, res) => {
   }
 });
 
-//DELETE
+//DELETE /api/todos/:id
 router.delete('/:id', async (req, res) => {
   try {
-    const deleted = await Todo.findByIdAndDelete(req.params.id);
-    if (!deleted) {
+    const todo = await Todo.findById(req.params.id);
+    if (!todo) {
       return res.status(404).json({ error: 'Todo not found.' });
     }
+
+    //确保待办事项属于当前认证用户
+    if (todo.user.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ error: 'Not authorized to delete this todo.' });
+    }
+
+    await todo.deleteOne();
     res.json({ message: 'Todo deleted.' });
   } catch (err) {
     console.error('Delete Todo Error', err);
@@ -58,6 +59,10 @@ router.patch('/:id', async (req, res) => {
   try {
     const todo = await Todo.findById(req.params.id);
     if (!todo) return res.status(404).json({ error: 'Todo not found.' });
+
+    if (todo.user.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ error: 'Not authorized to update this todo.' });
+    }
 
     todo.done = !todo.done;
     const updated = await todo.save();
