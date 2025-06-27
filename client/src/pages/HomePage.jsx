@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import PomodoroTimer from '../components/PomodoroTimer';
+import axiosInstance from '../utils/axiosInstance';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -15,9 +15,7 @@ const HomePage = () => {
     if (!token) return;
 
     try {
-      const res = await axios.get('http://localhost:5000/api/todos', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const res = await axiosInstance.get('/todos');
       setTodos(res.data);
     } catch (err) {
       console.error('Failed to fetch todos', err);
@@ -42,13 +40,7 @@ const HomePage = () => {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      await axios.post(
-        'http://localhost:5000/api/todos',
-        { title },
-        {
-          headers: { Authorization: `Bearer ${token}` }
-        }
-      );
+      await axiosInstance.post('/todos', { title });
       setTitle('');
       fetchTodos(); //重新加载任务列表
     } catch (err) {
@@ -60,9 +52,7 @@ const HomePage = () => {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      await axios.delete(`http://localhost:5000/api/todos/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await axiosInstance.delete(`/todos/${id}`);
       fetchTodos();
     } catch (err) {
       console.error('Delete error', err);
@@ -73,13 +63,7 @@ const HomePage = () => {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
-      await axios.patch(
-        `http://localhost:5000/api/todos/${id}`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` }
-        }
-      );
+      await axiosInstance.patch(`/todos/${id}`);
       fetchTodos(); //更新列表
     } catch (err) {
       console.error('Toggle error', err);

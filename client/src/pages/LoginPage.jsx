@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import axiosInstance from '../utils/axiosInstance';
 
 const LoginPage = () => {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -15,7 +15,7 @@ const LoginPage = () => {
     e.preventDefault();
     setMessage('');
     try {
-      const res = await axios.post('http://localhost:5000/api/users/login', form);
+      const res = await axiosInstance.post('/users/login', form);
       // 使用 context 中的 login 函数，它会处理状态更新和页面跳转
       login({ username: res.data.username }, res.data.token);
     } catch (err) {
