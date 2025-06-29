@@ -1,31 +1,35 @@
-# 根目录
-node_modules/
-.env
-dist/
-build/
-npm-debug.log*
+# 依赖 (Dependencies)
+/node_modules
+/client/node_modules
+/server/node_modules
 
-# 日志
+# 构建产物 (Build artifacts)
+/dist
+/build
+/client/dist
+
+# 日志 (Logs)
 logs
 *.log
+npm-debug.log*
+yarn-error.log
+yarn-debug.log
 
-# VSCode
-.vscode/
-
-# 系统文件
-.DS_Store
-Thumbs.db
-
-# 前端（React）
-client/node_modules/
-client/build/
-
-# 后端（Express）
-server/node_modules/
-
-# 环境变量文件
+# 环境变量 (Environment variables)
+# 注意：.env.example 模板文件应该被提交到版本库
+.env
 .env.local
 .env.development
 .env.production
-server/.env
-client/.env
+/server/.env
+/client/.env
+
+# 测试产物 (Test artifacts)
+/coverage
+.jest-cache
+
+# 编辑器和系统文件 (Editor & OS files)
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
