@@ -94,6 +94,15 @@ focus-list/
 - Smooth animation effects
 - Sound feedback system
 
+## 🎮 Quick Demo
+
+**For recruiters and evaluators**: You can quickly experience the application using the demo account below without registration:
+
+- **Demo Account**: `aware@example.com`
+- **Password**: `123456`
+
+_This demo account comes with pre-loaded sample tasks and timer history for immediate testing._
+
 ## 🚀 Quick Start
 
 ### Requirements
@@ -287,6 +296,15 @@ focus-list/
 - スムーズなアニメーション効果
 - 音響フィードバックシステム
 
+## 🎮 クイックデモ
+
+**採用担当者・評価者の方へ**: 登録不要で以下のデモアカウントですぐにアプリケーションをご体験いただけます：
+
+- **デモアカウント**: `aware@example.com`
+- **パスワード**: `123456`
+
+_このデモアカウントには、すぐにテストできるサンプルタスクとタイマー履歴が予め用意されています。_
+
 ## 🚀 クイックスタート
 
 ### 必要環境
@@ -479,6 +497,15 @@ focus-list/
 - 直观的界面设计
 - 流畅的动画效果
 - 音效反馈系统
+
+## 🎮 快速体验
+
+**给面试官和评估者**: 您可以使用以下演示账号快速体验应用，无需注册：
+
+- **演示账号**: `aware@example.com`
+- **密码**: `123456`
+
+_此演示账号预置了示例任务和计时记录，方便您立即测试各项功能。_
 
 ## 🚀 快速开始
 
