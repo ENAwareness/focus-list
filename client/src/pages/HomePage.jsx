@@ -73,44 +73,76 @@ const HomePage = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row md:justify-start md:items-start gap-8 mt-10 max-w-4xl mx-auto">
-        <div className="w-full md:w-64">
-          {' '}
+        <div className="w-full md:w-auto">
           <PomodoroTimer />
         </div>
-        <div className="flex-grow max-w-xl px-4">
-          {' '}
-          <h2 className="text-2xl font-bold mb-4">📝 My Focus List</h2>
+        <div className="flex-grow bg-white p-8 rounded-lg shadow-lg">
+          <h2 className="flex items-center text-xl font-semibold text-gray-500 mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 mr-2 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+              />
+            </svg>
+            FOCUS LIST
+          </h2>
           <form onSubmit={handleAddTodo} className="flex gap-2 mb-4">
             <input
               type="text"
-              placeholder="Enter a task"
+              placeholder="Add a new task..."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="flex-grow border rounded px-3 py-2"
+              maxLength="50"
+              className="flex-grow border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition-transform transform hover:scale-105 disabled:opacity-50"
+              disabled={!title.trim()}>
               Add
             </button>
           </form>
-          <ul className="space-y-2">
+          <ul className="space-y-1">
             {todos.length === 0 ? (
               <p className="text-gray-500">No tasks yet.</p>
             ) : (
               todos.map((todo) => (
                 <li
                   key={todo._id}
-                  onClick={() => handleToggle(todo._id)}
-                  className={`flex justify-between items-center px-4 py-2 border rounded cursor-pointer ${
-                    todo.done ? 'line-through text-gray-400' : ''
-                  }`}>
-                  <span>{todo.title}</span>
+                  className="flex justify-between items-center p-3 rounded-lg hover:bg-gray-50 group">
+                  <span
+                    onClick={() => handleToggle(todo._id)}
+                    className={`flex-grow cursor-pointer ${
+                      todo.done ? 'line-through text-gray-400' : 'text-gray-800'
+                    }`}>
+                    {todo.title}
+                  </span>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       handleDelete(todo._id);
                     }}
-                    className="text-red-500 hover:text-red-700">
-                    ❌
+                    className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
+                    </svg>
                   </button>
                 </li>
               ))
