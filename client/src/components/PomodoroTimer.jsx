@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 const PomodoroTimer = () => {
   const WORK_DURATION = 25 * 60;
@@ -6,6 +7,7 @@ const PomodoroTimer = () => {
   const [isRunning, setIsRunning] = useState(false);
   const workerRef = useRef(null);
   const audioRef = useRef(null);
+  const { lang } = useLanguage();
 
   // --- SVG Circle Calculation ---
   const radius = 70;
@@ -43,9 +45,9 @@ const PomodoroTimer = () => {
       setIsRunning(false);
       workerRef.current.postMessage({ command: 'stop' });
       audioRef.current?.play();
-      alert('⏰ Time is up! Take a break!');
+      alert(lang === 'ja' ? '⏰ 時間です！休憩しましょう！' : '⏰ Time is up! Take a break!');
     }
-  }, [timeLeft, isRunning]);
+  }, [timeLeft, isRunning, lang]);
 
   const handleStartPause = () => {
     if (isRunning) {
@@ -83,7 +85,7 @@ const PomodoroTimer = () => {
             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        POMODORO
+        {lang === 'ja' ? 'ポモドーロ' : 'POMODORO'}
       </h2>
       <div className="relative w-48 h-48 flex items-center justify-center mb-6">
         <svg className="absolute w-full h-full" viewBox="0 0 160 160">
@@ -118,13 +120,19 @@ const PomodoroTimer = () => {
         <button
           onClick={handleReset}
           className="text-gray-500 hover:text-gray-700 font-medium px-4 py-2 rounded-lg">
-          Reset
+          {lang === 'ja' ? 'リセット' : 'Reset'}
         </button>
         <button
           onClick={handleStartPause}
           disabled={timeLeft === 0}
           className="w-32 text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-md transition-transform transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
-          {isRunning ? 'Pause' : 'Start'}
+          {isRunning
+            ? lang === 'ja'
+              ? '一時停止'
+              : 'Pause'
+            : lang === 'ja'
+            ? 'スタート'
+            : 'Start'}
         </button>
       </div>
     </div>

@@ -19,6 +19,7 @@ A full-stack web application that combines Pomodoro Technique and task managemen
 - **User System**: Complete user registration, login, and authentication flow
 - **Task Management**: Create, delete, and mark todo items as complete
 - **Pomodoro Timer**: Focus timing functionality based on the Pomodoro Technique
+- **Internationalization (i18n)**: Seamlessly switch between English and Japanese.
 - **Real-time Feedback**: Sound alerts and visual feedback
 
 ## 🛠️ Tech Stack
@@ -81,12 +82,16 @@ focus-list/
 - Toggle task status (complete/incomplete)
 - Real-time data synchronization
 
+### 🌐 Internationalization
+
+- Dynamic language switching between English and Japanese across the entire application.
+- User-friendly UI with localized text.
+
 ### ⏰ Pomodoro Timer
 
 - 25-minute focus sessions
 - Background Web Worker ensures accurate timing
 - Sound alerts and visual notifications
-- Timer history tracking
 
 ### 🎵 User Experience
 
@@ -153,17 +158,28 @@ npm run dev
 
 ## 📸 Feature Demo
 
-- **Login Interface**: Clean user authentication page
-  ![Login Interface](./screenshots/login.png)
-
-- **Main Dashboard**: Perfect integration of task list and timer
-  ![Main Dashboard](./screenshots/dashboard.png)
-
-- **Timer Status**: Visual representation of focus time
-  ![Timer Status](./screenshots/timer.png)
-
-- **Task Management**: Intuitive task operation interface
-  ![Task Management](./screenshots/tasks.png)
+<table>
+  <tr>
+    <td align="center">
+      <p>Clean user authentication page</p>
+      <img src="./screenshots/login.png" alt="Login Interface" width="400">
+    </td>
+    <td align="center">
+      <p>Perfect integration of task list and timer</p>
+      <img src="./screenshots/dashboard.png" alt="Main Dashboard" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p>Visual representation of focus time</p>
+      <img src="./screenshots/timer.png" alt="Timer Status" width="400">
+    </td>
+    <td align="center">
+      <p>Intuitive task operation interface</p>
+      <img src="./screenshots/tasks.png" alt="Task Management" width="400">
+    </td>
+  </tr>
+</table>
 
 ## 🎯 Project Highlights
 
@@ -221,6 +237,7 @@ _This project reflects my comprehensive abilities in full-stack development, use
 - **ユーザーシステム**: 完全なユーザー登録、ログイン、認証フロー
 - **タスク管理**: ToDo 項目の作成、削除、完了マーク機能
 - **ポモドーロタイマー**: ポモドーロテクニックに基づく集中時間機能
+- **国際化 (i18n)**: 英語と日本語のシームレスな切り替え。
 - **リアルタイムフィードバック**: 音響アラートと視覚的なフィードバック
 
 ## 🛠️ 技術スタック
@@ -283,12 +300,16 @@ focus-list/
 - タスク状態切り替え（完了/未完了）
 - リアルタイムデータ同期
 
+### 🌐 国際化
+
+- アプリケーション全体での英語と日本語の動的な言語切り替え。
+- ローカライズされたテキストによる使いやすい UI。
+
 ### ⏰ ポモドーロタイマー
 
 - 25 分間の集中セッション
 - バックグラウンド Web Worker による正確なタイミング
 - 音響アラートと視覚的な通知
-- タイマー履歴追跡
 
 ### 🎵 ユーザーエクスペリエンス
 
@@ -355,17 +376,28 @@ npm run dev
 
 ## 📸 機能デモ
 
-- **ログインインターフェース**: シンプルなユーザー認証ページ
-  ![ログインインターフェース](./screenshots/login.png)
-
-- **メインダッシュボード**: タスクリストとタイマーの完璧な統合
-  ![メインダッシュボード](./screenshots/dashboard.png)
-
-- **タイマー状態**: 集中時間の視覚的表現
-  ![タイマー状態](./screenshots/timer.png)
-
-- **タスク管理**: 直感的なタスク操作インターフェース
-  ![タスク管理](./screenshots/tasks.png)
+<table>
+  <tr>
+    <td align="center">
+      <p>シンプルなユーザー認証ページ</p>
+      <img src="./screenshots/login.png" alt="ログインインターフェース" width="400">
+    </td>
+    <td align="center">
+      <p>タスクリストとタイマーの完璧な統合</p>
+      <img src="./screenshots/dashboard.png" alt="メインダッシュボード" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p>集中時間の視覚的表現</p>
+      <img src="./screenshots/timer.png" alt="タイマー状態" width="400">
+    </td>
+    <td align="center">
+      <p>直感的なタスク操作インターフェース</p>
+      <img src="./screenshots/tasks.png" alt="タスク管理" width="400">
+    </td>
+  </tr>
+</table>
 
 ## 🎯 プロジェクトハイライト
 
@@ -423,6 +455,7 @@ _このプロジェクトは、フルスタック開発、ユーザーエクス�
 - **用户系统**:完整的用户注册、登录、认证流程
 - **任务管理**:创建、删除、标记完成待办事项
 - **番茄钟计时器**:基于番茄工作法的专注计时功能
+- **国际化 (i18n)**: 支持英语和日语无缝切换。
 - **实时反馈**:音效提醒和视觉反馈
 
 ## 🛠️ 技术栈
@@ -485,12 +518,16 @@ focus-list/
 - 任务状态切换(完成/未完成)
 - 实时数据同步
 
+### 🌐 国际化
+
+- 整个应用支持英语和日语的动态语言切换。
+- 带有本地化文本的用户友好界面。
+
 ### ⏰ 番茄钟计时器
 
 - 25 分钟专注时间
 - 后台 Web Worker 确保计时准确
 - 音效提醒和视觉通知
-- 计时历史记录
 
 ### 🎵 用户体验
 
@@ -557,17 +594,28 @@ npm run dev
 
 ## 📸 功能演示
 
-- **登录界面**:简洁的用户认证页面
-  ![登录界面](./screenshots/login.png)
-
-- **主面板**:任务列表与计时器的完美结合
-  ![主面板](./screenshots/dashboard.png)
-
-- **计时状态**:专注时间的视觉化展示
-  ![计时状态](./screenshots/timer.png)
-
-- **任务管理**:直观的任务操作界面
-  ![任务管理](./screenshots/tasks.png)
+<table>
+  <tr>
+    <td align="center">
+      <p>简洁的用户认证页面</p>
+      <img src="./screenshots/login.png" alt="登录界面" width="400">
+    </td>
+    <td align="center">
+      <p>任务列表与计时器的完美结合</p>
+      <img src="./screenshots/dashboard.png" alt="主面板" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p>专注时间的视觉化展示</p>
+      <img src="./screenshots/timer.png" alt="计时状态" width="400">
+    </td>
+    <td align="center">
+      <p>直观的任务操作界面</p>
+      <img src="./screenshots/tasks.png" alt="任务管理" width="400">
+    </td>
+  </tr>
+</table>
 
 ## 🎯 项目亮点
 

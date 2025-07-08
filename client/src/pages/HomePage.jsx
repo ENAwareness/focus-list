@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PomodoroTimer from '../components/PomodoroTimer';
 import axiosInstance from '../utils/axiosInstance';
+import { useLanguage } from '../context/LanguageContext';
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { lang } = useLanguage();
 
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState('');
@@ -73,7 +75,10 @@ const HomePage = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row md:justify-start md:items-start gap-8 mt-10 max-w-4xl mx-auto">
-        <div className="w-full md:w-auto">
+        {/* 为 PomodoroTimer 的容器设置固定宽度，防止语言切换时布局抖动 */}
+        {/* w-96 (24rem) 与 PomodoroTimer 内部的 max-w-sm (24rem) 匹配 */}
+        {/* flex-shrink-0 防止该列在 flex 布局中被压缩 */}
+        <div className="w-full md:w-96 md:flex-shrink-0">
           <PomodoroTimer />
         </div>
         <div className="flex-grow bg-white p-8 rounded-lg shadow-lg">
@@ -91,12 +96,12 @@ const HomePage = () => {
                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
               />
             </svg>
-            FOCUS LIST
+            {lang === 'ja' ? 'フォーカスリスト' : 'FOCUS LIST'}
           </h2>
           <form onSubmit={handleAddTodo} className="flex gap-2 mb-4">
             <input
               type="text"
-              placeholder="Add a new task..."
+              placeholder={lang === 'ja' ? '新しいタスクを追加...' : 'Add a new task...'}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               maxLength="50"
@@ -106,12 +111,14 @@ const HomePage = () => {
               type="submit"
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition-transform transform hover:scale-105 disabled:opacity-50"
               disabled={!title.trim()}>
-              Add
+              {lang === 'ja' ? '追加' : 'Add'}
             </button>
           </form>
           <ul className="space-y-1">
             {todos.length === 0 ? (
-              <p className="text-gray-500">No tasks yet.</p>
+              <p className="text-gray-500">
+                {lang === 'ja' ? 'タスクはまだありません。' : 'No tasks yet.'}
+              </p>
             ) : (
               todos.map((todo) => (
                 <li
