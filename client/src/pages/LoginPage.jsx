@@ -6,6 +6,7 @@ import { useLanguage } from '../context/LanguageContext';
 const LoginPage = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const { lang } = useLanguage();
 
@@ -13,19 +14,31 @@ const LoginPage = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const performLogin = async (credentials) => {
     setMessage('');
+    setIsLoading(true);
     try {
-      const res = await axiosInstance.post('/users/login', form);
+      const res = await axiosInstance.post('/users/login', credentials);
       // 使用 context 中的 login 函数，它会处理状态更新和页面跳转
       login({ username: res.data.username }, res.data.token);
     } catch (err) {
       setMessage(
         err.response?.data?.error || (lang === 'ja' ? 'ログインに失敗しました。' : 'Login failed.')
       );
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    performLogin(form);
+  };
+
+  const handleGuestLogin = () => {
+    performLogin({ email: 'aware@example.com', password: '123456' });
+  };
+
   return (
     <div className="max-w-md mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg">
       <div className="text-center mb-10">
@@ -69,11 +82,31 @@ const LoginPage = () => {
           onChange={handleChange}
         />
         <button
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-transform transform hover:scale-105"
-          type="submit">
-          {lang === 'ja' ? 'ログイン' : 'Login'}
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-transform transform hover:scale-105 disabled:bg-blue-400 disabled:cursor-not-allowed"
+          type="submit"
+          disabled={isLoading}>
+          {isLoading
+            ? lang === 'ja'
+              ? '処理中...'
+              : 'Processing...'
+            : lang === 'ja'
+            ? 'ログイン'
+            : 'Login'}
         </button>
       </form>
+      <div className="my-4 flex items-center">
+        <div className="flex-grow border-t border-gray-300"></div>
+        <span className="flex-shrink mx-4 text-gray-400 text-sm">
+          {lang === 'ja' ? 'または' : 'OR'}
+        </span>
+        <div className="flex-grow border-t border-gray-300"></div>
+      </div>
+      <button
+        onClick={handleGuestLogin}
+        className="w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-transform transform hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        disabled={isLoading}>
+        {lang === 'ja' ? 'ゲストとしてログイン' : 'Login as Guest'}
+      </button>
       {message && <p className="mt-4 text-center text-sm text-red-500">{message}</p>}
     </div>
   );

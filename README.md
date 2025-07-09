@@ -75,6 +75,7 @@ focus-list/
 - JWT Token authentication
 - Secure password handling
 - Automatic login state persistence
+- Guest login for quick access
 
 ### 📝 Task Management
 
@@ -101,12 +102,9 @@ focus-list/
 
 ## 🎮 Quick Demo
 
-**For recruiters and evaluators**: You can quickly experience the application using the demo account below without registration:
+- **For recruiters and evaluators**: You can quickly experience the application by clicking the **"Login as Guest"** button on the login page. This will log you in with a pre-configured demo account.
 
-- **Demo Account**: `aware@example.com`
-- **Password**: `123456`
-
-_This demo account comes with pre-loaded sample tasks and timer history for immediate testing._
+_This demo account comes with pre-loaded sample tasks for immediate testing._
 
 ## 🚀 Quick Start
 
@@ -161,7 +159,7 @@ npm run dev
 <table>
   <tr>
     <td align="center">
-      <p>Clean user authentication page</p>
+      <p>Login page with guest access</p>
       <img src="./screenshots/login.png" alt="Login Interface" width="400">
     </td>
     <td align="center">
@@ -293,6 +291,7 @@ focus-list/
 - JWT Token 認証
 - 安全なパスワード処理
 - 自動ログイン状態維持
+- ゲストログインによるクイックアクセス
 
 ### 📝 タスク管理
 
@@ -319,12 +318,9 @@ focus-list/
 
 ## 🎮 クイックデモ
 
-**採用担当者・評価者の方へ**: 登録不要で以下のデモアカウントですぐにアプリケーションをご体験いただけます：
+- **採用担当者・評価者の方へ**: ログインページの **「ゲストとしてログイン」** ボタンをクリックするだけで、すぐにアプリケーションをご体験いただけます。これにより、事前に設定されたデモアカウントでログインします。
 
-- **デモアカウント**: `aware@example.com`
-- **パスワード**: `123456`
-
-_このデモアカウントには、すぐにテストできるサンプルタスクとタイマー履歴が予め用意されています。_
+_このデモアカウントには、すぐにテストできるサンプルタスクが予め用意されています。_
 
 ## 🚀 クイックスタート
 
@@ -379,7 +375,7 @@ npm run dev
 <table>
   <tr>
     <td align="center">
-      <p>シンプルなユーザー認証ページ</p>
+      <p>ゲストアクセス付きのログインページ</p>
       <img src="./screenshots/login.png" alt="ログインインターフェース" width="400">
     </td>
     <td align="center">
@@ -511,6 +507,7 @@ focus-list/
 - JWT Token 身份验证
 - 安全的密码处理
 - 自动登录状态保持
+- 游客登录，方便快速访问
 
 ### 📝 任务管理
 
@@ -537,12 +534,9 @@ focus-list/
 
 ## 🎮 快速体验
 
-**给面试官和评估者**: 您可以使用以下演示账号快速体验应用，无需注册：
+- **给面试官和评估者**: 您可以点击登录页面的 **“游客登录”** 按钮快速体验应用。这将使用一个预设的演示账号登录。
 
-- **演示账号**: `aware@example.com`
-- **密码**: `123456`
-
-_此演示账号预置了示例任务和计时记录，方便您立即测试各项功能。_
+_此演示账号预置了示例任务，方便您立即测试各项功能。_
 
 ## 🚀 快速开始
 
@@ -597,7 +591,7 @@ npm run dev
 <table>
   <tr>
     <td align="center">
-      <p>简洁的用户认证页面</p>
+      <p>包含游客登录的认证页面</p>
       <img src="./screenshots/login.png" alt="登录界面" width="400">
     </td>
     <td align="center">
