@@ -40,74 +40,76 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg">
-      <div className="text-center mb-10">
-        <div className="inline-block p-3 bg-blue-100 rounded-full mb-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8 text-blue-600"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}>
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center p-4">
+      <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-lg shadow-md">
+        <div className="flex flex-col items-center text-center mb-10">
+          <div className="inline-block p-3 bg-blue-100 rounded-full mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-blue-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+            {lang === 'ja' ? '目標に、集中しよう' : 'Focus on Your Goals'}
+          </h2>
+          <p className="text-gray-500 mt-2 text-base sm:text-lg text-center whitespace-nowrap">
+            {lang === 'ja'
+              ? 'シンプルなポモドーロ・タスク管理ツール'
+              : 'The simple Pomodoro & Task Manager'}
+          </p>
         </div>
-        <h2 className="text-2xl font-bold text-gray-800">
-          {lang === 'ja' ? 'Focus Listへようこそ' : 'Welcome to Focus List'}
-        </h2>
-        <p className="text-gray-500 mt-2">
-          {lang === 'ja'
-            ? 'ポモドーロとタスク管理で、最高の集中を。'
-            : 'Achieve peak focus with Pomodoro and task management.'}
-        </p>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <input
-          className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-          name="email"
-          placeholder={lang === 'ja' ? 'メールアドレス' : 'Email'}
-          type="email"
-          onChange={handleChange}
-        />
-        <input
-          className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-          name="password"
-          placeholder={lang === 'ja' ? 'パスワード' : 'Password'}
-          type="password"
-          onChange={handleChange}
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            name="email"
+            placeholder={lang === 'ja' ? 'メールアドレス' : 'Email'}
+            type="email"
+            onChange={handleChange}
+          />
+          <input
+            className="w-full mb-4 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            name="password"
+            placeholder={lang === 'ja' ? 'パスワード' : 'Password'}
+            type="password"
+            onChange={handleChange}
+          />
+          <button
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-transform transform hover:scale-105 disabled:bg-blue-400 disabled:cursor-not-allowed"
+            type="submit"
+            disabled={isLoading}>
+            {isLoading
+              ? lang === 'ja'
+                ? '処理中...'
+                : 'Processing...'
+              : lang === 'ja'
+              ? 'ログイン'
+              : 'Login'}
+          </button>
+        </form>
+        <div className="my-4 flex items-center">
+          <div className="flex-grow border-t border-gray-300"></div>
+          <span className="flex-shrink mx-4 text-gray-400 text-sm">
+            {lang === 'ja' ? 'または' : 'OR'}
+          </span>
+          <div className="flex-grow border-t border-gray-300"></div>
+        </div>
         <button
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-transform transform hover:scale-105 disabled:bg-blue-400 disabled:cursor-not-allowed"
-          type="submit"
+          onClick={handleGuestLogin}
+          className="w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-transform transform hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed"
           disabled={isLoading}>
-          {isLoading
-            ? lang === 'ja'
-              ? '処理中...'
-              : 'Processing...'
-            : lang === 'ja'
-            ? 'ログイン'
-            : 'Login'}
+          {lang === 'ja' ? 'ゲストとしてログイン' : 'Login as Guest'}
         </button>
-      </form>
-      <div className="my-4 flex items-center">
-        <div className="flex-grow border-t border-gray-300"></div>
-        <span className="flex-shrink mx-4 text-gray-400 text-sm">
-          {lang === 'ja' ? 'または' : 'OR'}
-        </span>
-        <div className="flex-grow border-t border-gray-300"></div>
+        {message && <p className="mt-4 text-center text-sm text-red-500">{message}</p>}
       </div>
-      <button
-        onClick={handleGuestLogin}
-        className="w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg transition-transform transform hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed"
-        disabled={isLoading}>
-        {lang === 'ja' ? 'ゲストとしてログイン' : 'Login as Guest'}
-      </button>
-      {message && <p className="mt-4 text-center text-sm text-red-500">{message}</p>}
     </div>
   );
 };
