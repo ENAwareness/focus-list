@@ -70,11 +70,11 @@ const PomodoroTimer = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-white p-8 rounded-lg shadow-lg max-w-sm mx-auto">
-      <h2 className="flex items-center justify-center text-xl font-semibold text-gray-500 mb-2">
+    <div className="mx-auto flex w-full max-w-sm flex-col items-center justify-center rounded-lg bg-white p-4 shadow-lg sm:p-6 md:p-8">
+      <h2 className="mb-2 flex items-center justify-center text-lg font-semibold text-gray-500 sm:text-xl">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 mr-2 text-gray-400"
+          className="mr-2 h-6 w-6 text-gray-400"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -87,8 +87,8 @@ const PomodoroTimer = () => {
         </svg>
         {lang === 'ja' ? 'ポモドーロ' : 'POMODORO'}
       </h2>
-      <div className="relative w-48 h-48 flex items-center justify-center mb-6">
-        <svg className="absolute w-full h-full" viewBox="0 0 160 160">
+      <div className="relative mb-6 flex h-40 w-40 items-center justify-center sm:h-48 sm:w-48">
+        <svg className="absolute h-full w-full" viewBox="0 0 160 160">
           {/* Background Circle */}
           <circle
             className="text-gray-200"
@@ -114,18 +114,18 @@ const PomodoroTimer = () => {
             transform="rotate(-90 80 80)"
           />
         </svg>
-        <div className="text-5xl font-mono text-gray-800">{formatTime(timeLeft)}</div>
+        <div className="font-mono text-4xl text-gray-800 sm:text-5xl">{formatTime(timeLeft)}</div>
       </div>
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-2 sm:space-x-4">
         <button
           onClick={handleReset}
-          className="text-gray-500 hover:text-gray-700 font-medium px-4 py-2 rounded-lg">
+          className="rounded-lg px-3 py-2 font-medium text-gray-500 hover:text-gray-700 sm:px-4">
           {lang === 'ja' ? 'リセット' : 'Reset'}
         </button>
         <button
           onClick={handleStartPause}
           disabled={timeLeft === 0}
-          className="w-32 text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-md transition-transform transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+          className="transform rounded-full bg-blue-500 px-6 py-3 font-bold text-white shadow-md transition-transform hover:scale-105 hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50 sm:px-8">
           {isRunning
             ? lang === 'ja'
               ? '一時停止'
