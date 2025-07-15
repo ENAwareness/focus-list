@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api', // 使用环境变量
+  baseURL: import.meta.env.VITE_API_URL || '/api', // 使用环境变量或相对路径
   timeout: 5000 // 请求超时时间
 });
 
