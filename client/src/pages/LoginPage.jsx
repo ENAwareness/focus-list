@@ -41,9 +41,9 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center p-4">
-      <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-lg shadow-md">
-        <div className="flex flex-col items-center text-center mb-10">
-          <div className="inline-block p-3 bg-blue-100 rounded-full mb-4">
+      <div className="w-full max-w-md rounded-lg bg-white p-4 shadow-md sm:p-8">
+        <div className="mb-10 flex flex-col items-center text-center">
+          <div className="mb-4 inline-block rounded-full bg-blue-100 p-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-8 w-8 text-blue-600"
@@ -58,13 +58,13 @@ const LoginPage = () => {
               />
             </svg>
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+          <h2 className="text-xl font-bold text-gray-800 sm:text-2xl">
             {lang === 'ja' ? '目標に、集中しよう' : 'Focus on Your Goals'}
           </h2>
-          <p className="text-gray-500 mt-2 text-base sm:text-lg text-center whitespace-nowrap">
+          <p className={`mt-2 text-center text-base text-gray-500 sm:text-lg ${lang !== 'ja' ? 'whitespace-nowrap' : ''}`}>
             {lang === 'ja'
-              ? 'シンプルなポモドーロ・タスク管理ツール'
-              : 'The simple Pomodoro & Task Manager'}
+              ? 'ポモドーロとタスク管理'
+              : 'The Pomodoro & Task Manager'}
           </p>
         </div>
         <form onSubmit={handleSubmit}>

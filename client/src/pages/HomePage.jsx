@@ -98,7 +98,7 @@ const HomePage = () => {
             </svg>
             {lang === 'ja' ? 'フォーカスリスト' : 'FOCUS LIST'}
           </h2>
-          <form onSubmit={handleAddTodo} className="flex gap-2 mb-4">
+          <form onSubmit={handleAddTodo} className="flex gap-1 mb-4 sm:gap-2">
             <input
               type="text"
               placeholder={lang === 'ja' ? '新しいタスクを追加...' : 'Add a new task...'}
@@ -109,7 +109,7 @@ const HomePage = () => {
             />
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 sm:px-6 rounded-lg transition-transform transform hover:scale-105 disabled:opacity-50 text-sm sm:text-base whitespace-nowrap"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-2 sm:px-3 rounded-lg transition-transform transform hover:scale-105 disabled:opacity-50 text-xs sm:text-sm whitespace-nowrap"
               disabled={!title.trim()}>
               {lang === 'ja' ? '追加' : 'Add'}
             </button>
