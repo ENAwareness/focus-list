@@ -37,6 +37,14 @@ A full-stack web application that combines Pomodoro Technique and task managemen
 - **Prettier** - Code formatting tool
 - **Nodemon** - Automatic development server restart
 
+### Testing Infrastructure
+
+- **Frontend Testing**: Vitest + React Testing Library + Jest DOM
+- **Backend Testing**: Jest + Babel for ES modules
+- **Test Coverage**: Istanbul/V8 coverage reporting
+- **Mocking**: Web Workers, Audio API, and database operations
+- **Test Types**: Unit tests, component tests, business logic tests
+
 ## 📁 Project Structure
 
 ```
@@ -47,11 +55,14 @@ focus-list/
 │   ├── src/
 │   │   ├── api/              # API request modules
 │   │   ├── components/       # Reusable components
+│   │   │   └── __tests__/    # Component unit tests
 │   │   ├── context/          # Global state management
 │   │   ├── pages/            # Page-level components
+│   │   ├── test/             # Test configuration and setup
 │   │   ├── utils/            # Utility functions
 │   │   ├── App.jsx           # App root component
 │   │   └── main.jsx          # App entry file
+│   ├── coverage/             # Test coverage reports
 │   ├── .env.example          # Environment variables example
 │   ├── package.json          # Frontend dependencies & scripts
 │   └── vite.config.js        # Vite configuration
@@ -60,6 +71,10 @@ focus-list/
 │   ├── middleware/           # Express middleware
 │   ├── models/               # Mongoose data models
 │   ├── routes/               # API routes
+│   ├── tests/                # Backend unit tests
+│   ├── coverage/             # Test coverage reports
+│   ├── babel.config.js       # Babel configuration for tests
+│   ├── jest.config.js        # Jest configuration
 │   ├── .env.example          # Environment variables example
 │   ├── package.json          # Backend dependencies & scripts
 │   └── server.js             # Server entry file
@@ -153,6 +168,38 @@ npm run dev
 cd client
 npm run dev
 ```
+
+### 🧪 Running Tests
+
+**Frontend Tests:**
+```bash
+cd client
+
+# Run all tests
+npm test
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Watch mode for development
+npm test -- --watch
+```
+
+**Backend Tests:**
+```bash
+cd server
+
+# Run business logic tests
+npm test -- --testPathPatterns=simple
+
+# Run tests with coverage report
+npm run test:coverage -- --testPathPatterns=simple
+```
+
+**Test Coverage Results:**
+- **PomodoroTimer Component**: 91.86% coverage (frontend)
+- **Business Logic**: Comprehensive unit tests (backend)
+- **Coverage Reports**: Available in `./coverage/` directories
 
 ## 📸 Feature Demo
 
@@ -253,6 +300,14 @@ _This project reflects my comprehensive abilities in full-stack development, use
 - **Prettier** - コードフォーマッティングツール
 - **Nodemon** - 開発サーバー自動再起動
 
+### テストインフラストラクチャ
+
+- **フロントエンドテスト**: Vitest + React Testing Library + Jest DOM
+- **バックエンドテスト**: Jest + ES モジュール対応 Babel
+- **テストカバレッジ**: Istanbul/V8 カバレッジレポート
+- **モック**: Web Workers、Audio API、データベース操作
+- **テストタイプ**: ユニットテスト、コンポーネントテスト、ビジネスロジックテスト
+
 ## 📁 プロジェクト構造
 
 ```
@@ -263,11 +318,14 @@ focus-list/
 │   ├── src/
 │   │   ├── api/              # APIリクエストモジュール
 │   │   ├── components/       # 再利用可能コンポーネント
+│   │   │   └── __tests__/    # コンポーネントユニットテスト
 │   │   ├── context/          # グローバル状態管理
 │   │   ├── pages/            # ページレベルコンポーネント
+│   │   ├── test/             # テスト設定とセットアップ
 │   │   ├── utils/            # ユーティリティ関数
 │   │   ├── App.jsx           # アプリルートコンポーネント
 │   │   └── main.jsx          # アプリエントリファイル
+│   ├── coverage/             # テストカバレッジレポート
 │   ├── .env.example          # 環境変数例
 │   ├── package.json          # フロントエンド依存関係とスクリプト
 │   └── vite.config.js        # Vite設定ファイル
@@ -276,6 +334,10 @@ focus-list/
 │   ├── middleware/           # Express ミドルウェア
 │   ├── models/               # Mongoose データモデル
 │   ├── routes/               # API ルート
+│   ├── tests/                # バックエンドユニットテスト
+│   ├── coverage/             # テストカバレッジレポート
+│   ├── babel.config.js       # テスト用 Babel 設定
+│   ├── jest.config.js        # Jest 設定
 │   ├── .env.example          # 環境変数例
 │   ├── package.json          # バックエンド依存関係とスクリプト
 │   └── server.js             # サーバーエントリファイル
@@ -369,6 +431,38 @@ npm run dev
 cd client
 npm run dev
 ```
+
+### 🧪 テスト実行
+
+**フロントエンドテスト:**
+```bash
+cd client
+
+# すべてのテストを実行
+npm test
+
+# カバレッジレポート付きでテスト実行
+npm run test:coverage
+
+# 開発用ウォッチモード
+npm test -- --watch
+```
+
+**バックエンドテスト:**
+```bash
+cd server
+
+# ビジネスロジックテストを実行
+npm test -- --testPathPatterns=simple
+
+# カバレッジレポート付きでテスト実行
+npm run test:coverage -- --testPathPatterns=simple
+```
+
+**テストカバレッジ結果:**
+- **PomodoroTimer コンポーネント**: 91.86% カバレッジ（フロントエンド）
+- **ビジネスロジック**: 包括的なユニットテスト（バックエンド）
+- **カバレッジレポート**: `./coverage/` ディレクトリで確認可能
 
 ## 📸 機能デモ
 
@@ -469,6 +563,14 @@ _このプロジェクトは、フルスタック開発、ユーザーエクス�
 - **Prettier** - 代码格式化工具
 - **Nodemon** - 开发服务器自动重启
 
+### 测试基础设施
+
+- **前端测试**: Vitest + React Testing Library + Jest DOM
+- **后端测试**: Jest + ES 模块支持的 Babel
+- **测试覆盖率**: Istanbul/V8 覆盖率报告
+- **模拟**: Web Workers、Audio API、数据库操作
+- **测试类型**: 单元测试、组件测试、业务逻辑测试
+
 ## 📁 项目结构
 
 ```
@@ -479,11 +581,14 @@ focus-list/
 │   ├── src/
 │   │   ├── api/              # API 请求模块
 │   │   ├── components/       # 可复用组件
+│   │   │   └── __tests__/    # 组件单元测试
 │   │   ├── context/          # 全局状态管理
 │   │   ├── pages/            # 页面级组件
+│   │   ├── test/             # 测试配置和设置
 │   │   ├── utils/            # 工具函数
 │   │   ├── App.jsx           # 应用根组件
 │   │   └── main.jsx          # 应用入口文件
+│   ├── coverage/             # 测试覆盖率报告
 │   ├── .env.example          # 环境变量示例
 │   ├── package.json          # 前端依赖与脚本
 │   └── vite.config.js        # Vite 配置文件
@@ -492,6 +597,10 @@ focus-list/
 │   ├── middleware/           # Express 中间件
 │   ├── models/               # Mongoose 数据模型
 │   ├── routes/               # API 路由
+│   ├── tests/                # 后端单元测试
+│   ├── coverage/             # 测试覆盖率报告
+│   ├── babel.config.js       # 测试用 Babel 配置
+│   ├── jest.config.js        # Jest 配置
 │   ├── .env.example          # 环境变量示例
 │   ├── package.json          # 后端依赖与脚本
 │   └── server.js             # 服务器入口文件
@@ -585,6 +694,38 @@ npm run dev
 cd client
 npm run dev
 ```
+
+### 🧪 运行测试
+
+**前端测试:**
+```bash
+cd client
+
+# 运行所有测试
+npm test
+
+# 运行测试并生成覆盖率报告
+npm run test:coverage
+
+# 开发监视模式
+npm test -- --watch
+```
+
+**后端测试:**
+```bash
+cd server
+
+# 运行业务逻辑测试
+npm test -- --testPathPatterns=simple
+
+# 运行测试并生成覆盖率报告
+npm run test:coverage -- --testPathPatterns=simple
+```
+
+**测试覆盖率结果:**
+- **PomodoroTimer 组件**: 91.86% 覆盖率（前端）
+- **业务逻辑**: 全面的单元测试（后端）
+- **覆盖率报告**: 可在 `./coverage/` 目录中查看
 
 ## 📸 功能演示
 
