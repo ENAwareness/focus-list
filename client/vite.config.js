@@ -14,4 +14,9 @@ export default defineConfig({
     // Allow access from ngrok tunnels
     allowedHosts: ['.ngrok-free.app'],
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.js',
+  }
 })
